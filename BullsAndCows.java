@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class BullsAndCows extends Canvas implements CommandListener {
  
-  // Константа, которая представляет белый цвет.
+  // РљРѕРЅСЃС‚Р°РЅС‚Р°, РєРѕС‚РѕСЂР°СЏ РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р±РµР»С‹Р№ С†РІРµС‚.
   private static final int WHITE = 0xFF << 16 | 0xFF << 8 | 0xFF;
   private static final int RED = 0xFF000000 | 0xc0 << 16 | 0x00 << 8 | 0x00;
   private static final int BLACK = ~WHITE;
@@ -44,8 +44,8 @@ public class BullsAndCows extends Canvas implements CommandListener {
   }
    
 
-  /* рисует белый отсекаемый прямоугольник, эффективно стирающий все,
-   * что было изображено в Canvas перед этим
+  /* СЂРёСЃСѓРµС‚ Р±РµР»С‹Р№ РѕС‚СЃРµРєР°РµРјС‹Р№ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє, СЌС„С„РµРєС‚РёРІРЅРѕ СЃС‚РёСЂР°СЋС‰РёР№ РІСЃРµ,
+   * С‡С‚Рѕ Р±С‹Р»Рѕ РёР·РѕР±СЂР°Р¶РµРЅРѕ РІ Canvas РїРµСЂРµРґ СЌС‚РёРј
    */
   protected void paintClipRect(Graphics g) {
     int clipX = g.getClipX();
@@ -59,9 +59,9 @@ public class BullsAndCows extends Canvas implements CommandListener {
     g.setColor(color);
   }
 
-  /* отображает внешний вид этого подкласса в Canvas */
+  /* РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РІРЅРµС€РЅРёР№ РІРёРґ СЌС‚РѕРіРѕ РїРѕРґРєР»Р°СЃСЃР° РІ Canvas */
   public void paint(Graphics g) {
-    paintClipRect(g);  // очистить экран
+    paintClipRect(g);  // РѕС‡РёСЃС‚РёС‚СЊ СЌРєСЂР°РЅ
 
     int width = getWidth();
     int height = getHeight();
@@ -89,14 +89,14 @@ public class BullsAndCows extends Canvas implements CommandListener {
       g.drawString("You Win :))", 30, 40, Graphics.LEFT | Graphics.BOTTOM);
       }
     if (you_lose) {
-      paintClipRect(g);  // очистить экран
+      paintClipRect(g);  // Г®Г·ГЁГ±ГІГЁГІГј ГЅГЄГ°Г Г­
       g.drawString("You Lose :((", 30, 40, Graphics.LEFT | Graphics.BOTTOM);
       g.drawString(mass[0] + " " + mass[1] + " " + mass[2] + " " + mass[3], 35, 70, Graphics.LEFT | Graphics.BOTTOM);
     }
   }
 
-  // Определяет, что обработка должна быть сделана в ответ на событие опускания
-  // клавиши, произошедшее в Canvas. Этот метод подменяет тот же самый метод в Canvas.
+  // РћРїСЂРµРґРµР»СЏРµС‚, С‡С‚Рѕ РѕР±СЂР°Р±РѕС‚РєР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЃРґРµР»Р°РЅР° РІ РѕС‚РІРµС‚ РЅР° СЃРѕР±С‹С‚РёРµ РѕРїСѓСЃРєР°РЅРёСЏ
+  // РєР»Р°РІРёС€Рё, РїСЂРѕРёР·РѕС€РµРґС€РµРµ РІ Canvas. Р­С‚РѕС‚ РјРµС‚РѕРґ РїРѕРґРјРµРЅСЏРµС‚ С‚РѕС‚ Р¶Рµ СЃР°РјС‹Р№ РјРµС‚РѕРґ РІ Canvas.
   public void keyReleased(int keyCode) {
     printKeyEventInfo(keyCode);
   }
@@ -135,12 +135,12 @@ public class BullsAndCows extends Canvas implements CommandListener {
         msg[msg_ind] += ent_mass[i] + " ";
 
       for (int i = 0; i < 4; i++)
-        if (ent_mass[i] == mass[i]) msg[msg_ind] += "Б";
+        if (ent_mass[i] == mass[i]) msg[msg_ind] += "ГЃ";
 
       for (int i = 0; i < 4; i++) 
         for (int j = 0; j < 4; j++) {
           if (ent_mass[i] == mass[j])
-            if (ent_mass[i] != mass[i]) msg[msg_ind] += "К";
+            if (ent_mass[i] != mass[i]) msg[msg_ind] += "ГЉ";
         }
 
       boolean b = true;

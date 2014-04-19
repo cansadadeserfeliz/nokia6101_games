@@ -9,13 +9,13 @@ public class IMatrix extends Canvas implements CommandListener {
   private static final int BLUE_DARK = Integer.parseInt("000000000000000011111111", 2);
   private static final int GREEN = Integer.parseInt("000000001111111100000000", 2);
 
-  boolean det_is_null = true;  // true - определитель матрицы = 0
-                                // false - определитель матрицы != 0
-  int num = 0;                  // вводимое число
+  boolean det_is_null = true;  // true - РѕРїСЂРµРґРµР»РёС‚РµР»СЊ РјР°С‚СЂРёС†С‹ = 0
+                                // false - РѕРїСЂРµРґРµР»РёС‚РµР»СЊ РјР°С‚СЂРёС†С‹ != 0
+  int num = 0;                  // РІРІРѕРґРёРјРѕРµ С‡РёСЃР»Рѕ
   String msg[] = { "A11", "A12", "A13",    
                    "A21", "A22", "A23",
                    "A31", "A32", "A33" };
-  int arr[] = new int[9];       // массив значений матрицы
+  int arr[] = new int[9];       // РјР°СЃСЃРёРІ Р·РЅР°С‡РµРЅРёР№ РјР°С‚СЂРёС†С‹
 
   private Command back = new Command("Back", Command.BACK, 1);
   private Command go = new Command("Go", Command.OK, 1); 
@@ -40,8 +40,8 @@ public class IMatrix extends Canvas implements CommandListener {
     display.setCurrent(this);
   }
 
-  /* рисует белый отсекаемый прямоугольник, эффективно стирающий все,
-   * что было изображено в Canvas перед этим
+  /* СЂРёСЃСѓРµС‚ Р±РµР»С‹Р№ РѕС‚СЃРµРєР°РµРјС‹Р№ РїСЂв‚¬РјРѕСѓРіРѕР»СЊРЅРёРє, СЌС„С„РµРєС‚РёРІРЅРѕ СЃС‚РёСЂР°СЋС‰РёР№ РІСЃРµ,
+   * С‡С‚Рѕ Р±С‹Р»Рѕ РёР·РѕР±СЂР°Р¶РµРЅРѕ РІ Canvas РїРµСЂРµРґ СЌС‚РёРј
    */
   protected void paintClipRect(Graphics g) {
     int clipX = g.getClipX();
@@ -55,16 +55,16 @@ public class IMatrix extends Canvas implements CommandListener {
     g.setColor(color);
   }
 
-  /* отображает внешний вид этого подкласса в Canvas */
+  /* РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РІРЅРµС€РЅРёР№ РІРёРґ СЌС‚РѕРіРѕ РїРѕРґРєР»Р°СЃСЃР° РІ Canvas */
   public void paint(Graphics g) {
-    paintClipRect(g);  // очистить экран
+    paintClipRect(g);  // РѕС‡РёСЃС‚РёС‚СЊ СЌРєСЂР°РЅ
 
     int width = getWidth();
     int height = getHeight();
 
     g.setColor(BLACK);
     g.setFont(Font.getDefaultFont());
-    g.drawString("Введите значения матрицы: ", 3, 12, Graphics.LEFT | Graphics.BOTTOM);
+    g.drawString("Enter matrix values: ", 3, 12, Graphics.LEFT | Graphics.BOTTOM);
     g.drawString(msg[0] + " || " + msg[1] + " || " + msg[2], 3, 25, Graphics.LEFT | Graphics.BOTTOM);
     g.drawString(msg[3] + " || " + msg[4] + " || " + msg[5], 3, 38, Graphics.LEFT | Graphics.BOTTOM);
     g.drawString(msg[6] + " || " + msg[7] + " || " + msg[8], 3, 51, Graphics.LEFT | Graphics.BOTTOM);
@@ -74,7 +74,7 @@ public class IMatrix extends Canvas implements CommandListener {
       g.drawString("Determinant is NULL", 3, 66, Graphics.LEFT | Graphics.BOTTOM);
     if(!det_is_null) {
       g.drawString("Determinant = " + det, 3, 66, Graphics.LEFT | Graphics.BOTTOM);
-      g.drawString("Обратная матрица:", 3, 78, Graphics.LEFT | Graphics.BOTTOM);
+      g.drawString("Inverse matrix:", 3, 78, Graphics.LEFT | Graphics.BOTTOM);
 
       g.drawString(inv_msg[0] + " || " + inv_msg[1] + " || " + inv_msg[2], 3, 91, Graphics.LEFT | Graphics.BOTTOM);
       g.drawString(inv_msg[3] + " || " + inv_msg[4] + " || " + inv_msg[5], 3, 103, Graphics.LEFT | Graphics.BOTTOM);
@@ -82,8 +82,8 @@ public class IMatrix extends Canvas implements CommandListener {
     }  
   }
 
-  // Определяет, что обработка должна быть сделана в ответ на событие опускания
-  // клавиши, произошедшее в Canvas. Этот метод подменяет тот же самый метод в Canvas.
+  // OРїСЂРµРґРµР»в‚¬РµС‚, С‡С‚Рѕ РѕР±СЂР°Р±РѕС‚РєР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЃРґРµР»Р°РЅР° РІ РѕС‚РІРµС‚ РЅР° СЃРѕР±С‹С‚РёРµ РѕРїСѓСЃРєР°РЅРёв‚¬
+  // РєР»Р°РІРёС€Рё, РїСЂРѕРёР·РѕС€РµРґС€РµРµ РІ Canvas. РЃС‚РѕС‚ РјРµС‚РѕРґ РїРѕРґРјРµРЅв‚¬РµС‚ С‚РѕС‚ Р¶Рµ СЃР°РјС‹Р№ РјРµС‚РѕРґ РІ Canvas.
   public void keyReleased(int keyCode) {
     switch(keyCode){
       case KEY_NUM1:  

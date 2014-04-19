@@ -12,9 +12,11 @@ BullsAndCows http://en.wikipedia.org/wiki/Bulls_and_cows
 
 ``IMatrix.java`` - Finds inverse of 3x3 matrix
 
-``OLucky.java`` - "Who Wants to Be a Millionaire?" game; questions never change :)
+``OLucky.java`` - "Who Wants to Be a Millionaire?" game; questions never change ;)
 
 ``SeaFight.java`` - Battleship game http://en.wikipedia.org/wiki/Battleship_(game)
 
+
+(sorry for comments in Russian)
 
 

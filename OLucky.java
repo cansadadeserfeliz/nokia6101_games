@@ -52,7 +52,7 @@ public class OLucky extends Canvas implements CommandListener {
     int rnum[] = new int[MAX_Q];
     int t = 0;
 
-//               "***********************"; // максимально возможная по длине строка
+//               "***********************";
 
     qstr[t][0] = "Sasha _____ English.";
     qstr[t][1] = "";  
@@ -351,8 +351,8 @@ public class OLucky extends Canvas implements CommandListener {
   } 
    
 
-  /* рисует белый отсекаемый прямоугольник, эффективно стирающий все,
-   * что было изображено в Canvas перед этим
+  /* СЂРёСЃСѓРµС‚ Р±РµР»С‹Р№ РѕС‚СЃРµРєР°РµРјС‹Р№ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє, СЌС„С„РµРєС‚РёРІРЅРѕ СЃС‚РёСЂР°СЋС‰РёР№ РІСЃРµ,
+   * С‡С‚Рѕ Р±С‹Р»Рѕ РёР·РѕР±СЂР°Р¶РµРЅРѕ РІ Canvas РїРµСЂРµРґ СЌС‚РёРј
    */
   protected void paintClipRect(Graphics g) {
     int clipX = g.getClipX();
@@ -366,14 +366,14 @@ public class OLucky extends Canvas implements CommandListener {
     g.setColor(color);
   }
 
-  /* отображает внешний вид этого подкласса в Canvas */
+  /* РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РІРЅРµС€РЅРёР№ РІРёРґ СЌС‚РѕРіРѕ РїРѕРґРєР»Р°СЃСЃР° РІ Canvas */
   public void paint(Graphics g) {
-    paintClipRect(g);  // очистить экран
+    paintClipRect(g);  // РѕС‡РёСЃС‚РёС‚СЊ СЌРєСЂР°РЅ
     int str_num = 13;
 
     g.setColor(BLACK);
     g.setFont(Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
-    g.drawString("Вопрос " + (quest_number + 1), 3, str_num, Graphics.LEFT | Graphics.BOTTOM);
+    g.drawString("Г‚Г®ГЇГ°Г®Г± " + (quest_number + 1), 3, str_num, Graphics.LEFT | Graphics.BOTTOM);
 
     g.fillRect(75, 1, 200, 13);
     g.setColor(GREEN);
@@ -419,8 +419,8 @@ public class OLucky extends Canvas implements CommandListener {
     }
   }
 
-  // Определяет, что обработка должна быть сделана в ответ на событие опускания
-  // клавиши, произошедшее в Canvas. Этот метод подменяет тот же самый метод в Canvas.
+  // РћРїСЂРµРґРµР»СЏРµС‚, С‡С‚Рѕ РѕР±СЂР°Р±РѕС‚РєР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЃРґРµР»Р°РЅР° РІ РѕС‚РІРµС‚ РЅР° СЃРѕР±С‹С‚РёРµ РѕРїСѓСЃРєР°РЅРёСЏ
+  // РєР»Р°РІРёС€Рё, РїСЂРѕРёР·РѕС€РµРґС€РµРµ РІ Canvas. Р­С‚РѕС‚ РјРµС‚РѕРґ РїРѕРґРјРµРЅСЏРµС‚ С‚РѕС‚ Р¶Рµ СЃР°РјС‹Р№ РјРµС‚РѕРґ РІ Canvas.
   public void keyReleased(int keyCode) {
     switch(keyCode){
       case UP: 

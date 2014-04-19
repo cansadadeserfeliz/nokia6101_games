@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class SeaFight extends Canvas implements CommandListener {
  
-  // Константа, которая представляет белый цвет.
+  // РљРѕРЅСЃС‚Р°РЅС‚Р°, РєРѕС‚РѕСЂР°СЏ РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р±РµР»С‹Р№ С†РІРµС‚.
   private static final int WHITE = 0xFF << 16 | 0xFF << 8 | 0xFF;
   private static final int RED = 0xFF000000 | 0xc0 << 16 | 0x00 << 8 | 0x00;
   private static final int BLACK = ~WHITE;
@@ -11,7 +11,7 @@ public class SeaFight extends Canvas implements CommandListener {
   private static final int BLUE_DARK = Integer.parseInt("000000000000000011111111", 2);
   private static final int GREEN = Integer.parseInt("000000001111111100000000", 2);
  
-  int m_sea[][] = new int[10][10]; // исходное поле с кораблями
+  int m_sea[][] = new int[10][10]; // РёСЃС…РѕРґРЅРѕРµ РїРѕР»Рµ СЃ РєРѕСЂР°Р±Р»СЏРјРё
   /*{
   {0, 1, 0, 0, 0, 0, 0, 0, 1, 0},
   {0, 1, 0, 1, 1, 0, 0, 0, 0, 0},
@@ -26,16 +26,16 @@ public class SeaFight extends Canvas implements CommandListener {
   };
   */
 
-  int count = 0; // = 20 заполненных ячеек
+  int count = 0; // = 20 Р·Р°РїРѕР»РЅРµРЅРЅС‹С… СЏС‡РµРµРє
   boolean is_first = true;
-  int move = 0;  // номер хода
+  int move = 0;  // РЅРѕРјРµСЂ С…РѕРґР°
 
   boolean show_all = false;
 
-  int shotX = -1;     // координаты выстрела
+  int shotX = -1;     // РєРѕРѕСЂРґРёРЅР°С‚С‹ РІС‹СЃС‚СЂРµР»Р°
   int shotY = -1;
 
-  int combat[][] = new int[10][10]; // 1 - был произведен удар; 0 - нет
+  int combat[][] = new int[10][10]; // 1 - Р±С‹Р» РїСЂРѕРёР·РІРµРґРµРЅ СѓРґР°СЂ; 0 - РЅРµС‚
 
   private Command back = new Command("Back", Command.BACK, 1);
   private Command go = new Command("Go", Command.OK, 1); 
@@ -50,11 +50,11 @@ public class SeaFight extends Canvas implements CommandListener {
     setCommandListener(this);
     display.setCurrent(this);
 
-    // заполняем исходное поле кораблями
+    ]// Р·Р°РїРѕР»РЅСЏРµРј РёСЃС…РѕРґРЅРѕРµ РїРѕР»Рµ РєРѕСЂР°Р±Р»СЏРјРё
     
     Random rund = new Random();
     int x = 0, y = 0;
-    int TT = 0;   // количество труб
+    int TT = 0;   // РєРѕР»РёС‡РµСЃС‚РІРѕ С‚СЂСѓР±
                   // 0, 1, 2, 3 - "1"
                   // 4, 5, 6    - "2"
                   // 7, 8       - "3"
@@ -64,16 +64,16 @@ public class SeaFight extends Canvas implements CommandListener {
   for (TT = 0; TT < 10; TT++){
 
     w1: while(true){
-      // все корабли расставлены
+      // РІСЃРµ РєРѕСЂР°Р±Р»Рё СЂР°СЃСЃС‚Р°РІР»РµРЅС‹
  
       rund = new Random();
       x = Math.abs(rund.nextInt() % 10);
       y = Math.abs(rund.nextInt() % 10);
 
-      // если координаты x, y не заняты 
+      // РµСЃР»Рё РєРѕРѕСЂРґРёРЅР°С‚С‹ x, y РЅРµ Р·Р°РЅСЏС‚С‹ 
       if(m_sea[y][x] != 1) { 
  
-        // если вокруг нее имеются другие точки
+        // РµСЃР»Рё РІРѕРєСЂСѓРі РЅРµРµ РёРјРµСЋС‚СЃСЏ РґСЂСѓРіРёРµ С‚РѕС‡РєРё
         if(y-1 >= 0){
           if(m_sea[y-1][x] == 1) continue w1; 
           if(x-1 >= 0) 
@@ -93,130 +93,130 @@ public class SeaFight extends Canvas implements CommandListener {
         if(x+1 < 10)
           if(m_sea[y][x+1] == 1) continue w1; 
 
-        // ставим точку с координатами x, y
+        // СЃС‚Р°РІРёРј С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё x, y
         m_sea[y][x] = 1; 
 
-        // если 1-трубный - в начало цикла for
+        // РµСЃР»Рё 1-С‚СЂСѓР±РЅС‹Р№ - РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р° for
         if(TT == 0 || TT == 1 || TT == 2 || TT == 3) {
           break w1;
         }
 
-        // выбираем направление формирования корабля
+        // РІС‹Р±РёСЂР°РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РєРѕСЂР°Р±Р»СЏ
         way = rund.nextInt();
         if (way >= 0) way = 1; // down
         else way = 0;          // right
 
-        // если вниз
+        // РµСЃР»Рё РІРЅРёР·
         if (way == 1) {
           if(y+1 >= 10) {
-            m_sea[y][x] = 0; // удаляем точку
-            continue w1;        // в начало цикла
+            m_sea[y][x] = 0;  // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ
+            continue w1;      // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
           if(is_next(y+1, x, true)) {
-            m_sea[y][x] = 0; // удаляем точку
-            continue w1;        // в начало цикла
+            m_sea[y][x] = 0;  // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ
+            continue w1;      // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
-          m_sea[y+1][x] = 1;  // ставим точку с координатами x, y+1
+          m_sea[y+1][x] = 1;  // СЃС‚Р°РІРёРј С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё x, y+1
 
-          // если 2-трубный - в начало цикла for
+          // РµСЃР»Рё 2-С‚СЂСѓР±РЅС‹Р№ - РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р° for
           if(TT == 4 || TT == 5 || TT == 6) {
             break w1;
           }
 
          if(y+2 >= 10) {
-            m_sea[y][x] = 0;   // удаляем точку [y]  [x]
-            m_sea[y+1][x] = 0; // удаляем точку [y+1][x]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y]  [x]
+            m_sea[y+1][x] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y+1][x]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
           if(is_next(y+2, x, true)) {
-            m_sea[y][x] = 0;   // удаляем точку [y]  [x]
-            m_sea[y+1][x] = 0; // удаляем точку [y+1][x]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y]  [x]
+            m_sea[y+1][x] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y+1][x]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
-          m_sea[y+2][x] = 1;  // ставим точку с координатами x, y+2
+          m_sea[y+2][x] = 1;  // СЃС‚Р°РІРёРј С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё x, y+2
 
-          // если 3-трубный - в начало цикла
+          // РµСЃР»Рё 3-С‚СЂСѓР±РЅС‹Р№ - РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           if(TT == 7 || TT == 8) {
             break w1;
           }
 
          if(y+3 >= 10) {
-            m_sea[y][x] = 0;   // удаляем точку [y]  [x]
-            m_sea[y+1][x] = 0; // удаляем точку [y+1][x]
-            m_sea[y+2][x] = 0; // удаляем точку [y+2][x]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y]  [x]
+            m_sea[y+1][x] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y+1][x]
+            m_sea[y+2][x] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y+2][x]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
           if(is_next(y+3, x, true)) {
-            m_sea[y][x] = 0;   // удаляем точку [y]  [x]
-            m_sea[y+1][x] = 0; // удаляем точку [y+1][x]
-            m_sea[y+2][x] = 0; // удаляем точку [y+2][x]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y]  [x]
+            m_sea[y+1][x] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y+1][x]
+            m_sea[y+2][x] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y+2][x]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
-          m_sea[y+3][x] = 1;  // ставим точку с координатами x, y+3
+          m_sea[y+3][x] = 1;  // СЃС‚Р°РІРёРј С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё x, y+3
           break w1;
-        } // END если вниз
+        } // END РµСЃР»Рё РІРЅРёР·
 
-        // если вправо
+        // РµСЃР»Рё РІРїСЂР°РІРѕ
         else {
           if(x+1 >= 10) {
-            m_sea[y][x] = 0; // удаляем точку
-            continue w1;        // в начало цикла
+            m_sea[y][x] = 0;  // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ
+            continue w1;      // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
           if(is_next(y, x+1, false)) {
-            m_sea[y][x] = 0; // удаляем точку
-            continue w1;        // в начало цикла
+            m_sea[y][x] = 0;  // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ
+            continue w1;      // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
-          m_sea[y][x+1] = 1;  // ставим точку с координатами x+1, y
+          m_sea[y][x+1] = 1;  // СЃС‚Р°РІРёРј С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё x+1, y
 
-          // если 2-трубный - в начало цикла
+          // РµСЃР»Рё 2-С‚СЂСѓР±РЅС‹Р№ - РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           if(TT == 4 || TT == 5 || TT == 6) {
             break;
           }
 
          if(x+2 >= 10) {
-            m_sea[y][x] = 0;   // удаляем точку [y][x]
-            m_sea[y][x+1] = 0; // удаляем точку [y][x+1]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x]
+            m_sea[y][x+1] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x+1]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
           if(is_next(y, x+2, false)) {
-            m_sea[y][x] = 0;   // удаляем точку [y][x]
-            m_sea[y][x+1] = 0; // удаляем точку [y][x+1]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x]
+            m_sea[y][x+1] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x+1]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
-          m_sea[y][x+2] = 1;  // ставим точку с координатами x+2, y
+          m_sea[y][x+2] = 1;  // СЃС‚Р°РІРёРј С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё x+2, y
 
-          // если 3-трубный - в начало цикла
+          // РµСЃР»Рё 3-С‚СЂСѓР±РЅС‹Р№ - РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           if(TT == 7 || TT == 8) {
             break w1;
           }
 
          if(x+3 >= 10) {
-            m_sea[y][x] = 0;   // удаляем точку [y][x]
-            m_sea[y][x+1] = 0; // удаляем точку [y][x+1]
-            m_sea[y][x+2] = 0; // удаляем точку [y][x+2]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x]
+            m_sea[y][x+1] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x+1]
+            m_sea[y][x+2] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x+2]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
           if(is_next(y, x+3, false)) {
-            m_sea[y][x] = 0;   // удаляем точку [y][x]
-            m_sea[y][x+1] = 0; // удаляем точку [y][x+1]
-            m_sea[y][x+2] = 0; // удаляем точку [y][x+2]
-            continue w1;          // в начало цикла
+            m_sea[y][x] = 0;   // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x]
+            m_sea[y][x+1] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x+1]
+            m_sea[y][x+2] = 0; // СѓРґР°Р»СЏРµРј С‚РѕС‡РєСѓ [y][x+2]
+            continue w1;       // РІ РЅР°С‡Р°Р»Рѕ С†РёРєР»Р°
           }
 
-          m_sea[y][x+3] = 1;  // ставим точку с координатами x+3, y
+          m_sea[y][x+3] = 1;  // СЃС‚Р°РІРёРј С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё x+3, y
           break w1;
-        } // END если вправо
+        } // END РµСЃР»Рё РІРїСЂР°РІРѕ
 
       } // END if(m_sea[y][x] != 1)
     } // END while
@@ -225,8 +225,8 @@ public class SeaFight extends Canvas implements CommandListener {
   } // END function SeaFight(){}
 
 
-  /* рисует белый отсекаемый прямоугольник, эффективно стирающий все,
-   * что было изображено в Canvas перед этим
+  /* СЂРёСЃСѓРµС‚ Р±РµР»С‹Р№ РѕС‚СЃРµРєР°РµРјС‹Р№ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє, СЌС„С„РµРєС‚РёРІРЅРѕ СЃС‚РёСЂР°СЋС‰РёР№ РІСЃРµ,
+   * С‡С‚Рѕ Р±С‹Р»Рѕ РёР·РѕР±СЂР°Р¶РµРЅРѕ РІ Canvas РїРµСЂРµРґ СЌС‚РёРј
    */
   protected void paintClipRect(Graphics g) {
     int clipX = g.getClipX();
@@ -240,20 +240,20 @@ public class SeaFight extends Canvas implements CommandListener {
     g.setColor(color);
   }
 
-  /* отображает внешний вид этого подкласса в Canvas */
+  /* РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РІРЅРµС€РЅРёР№ РІРёРґ СЌС‚РѕРіРѕ РїРѕРґРєР»Р°СЃСЃР° РІ Canvas */
   public void paint(Graphics g) {
-    paintClipRect(g);  // очистить экран
+    paintClipRect(g);  // РѕС‡РёСЃС‚РёС‚СЊ СЌРєСЂР°РЅ
 
     int width = getWidth() - 5;
     int height = getHeight() - 20;
 
-    int dx = width / 10;     // разбиение по x
-    int dy = height / 10;    // разбиение по y
+    int dx = width / 10;     // СЂР°Р·Р±РёРµРЅРёРµ РїРѕ x
+    int dy = height / 10;    // СЂР°Р·Р±РёРµРЅРёРµ РїРѕ y
 
     g.setColor(BLACK);
 
     g.setColor(BLUE_DARK);
-    // ставим метку в ту ктетку в которую был произведен удар
+    // СЃС‚Р°РІРёРј РјРµС‚РєСѓ РІ С‚Сѓ РєС‚РµС‚РєСѓ РІ РєРѕС‚РѕСЂСѓСЋ Р±С‹Р» РїСЂРѕРёР·РІРµРґРµРЅ СѓРґР°СЂ
     for (int i = 0; i < 10; i++)
       for (int j = 0; j < 10; j++)
         if (combat[i][j] == 1)
@@ -261,14 +261,14 @@ public class SeaFight extends Canvas implements CommandListener {
 //          g.fillRect(i*dx + dx/2 - dx/10 + 5, j*dy + dy/2 - dy/10 + 20, dx/5, dy/5);
 
      g.setColor(RED);
-    // закрашиваем клетку если произошло попадание
+    // Р·Р°РєСЂР°С€РёРІР°РµРј РєР»РµС‚РєСѓ РµСЃР»Рё РїСЂРѕРёР·РѕС€Р»Рѕ РїРѕРїР°РґР°РЅРёРµ
     for (int i = 0; i < 10; i++)
       for (int j = 0; j < 10; j++)
         if (combat[i][j] == 1 && m_sea[i][j] == 1) {
           g.fillRect(i*dx + 5, j*dy + 20, dx, dy);
         }
 
-    // !!! если нажата Show_all кнопка показываем все спрятанные корабли
+    // !!! РµСЃР»Рё РЅР°Р¶Р°С‚Р° Show_all РєРЅРѕРїРєР° РїРѕРєР°Р·С‹РІР°РµРј РІСЃРµ СЃРїСЂСЏС‚Р°РЅРЅС‹Рµ РєРѕСЂР°Р±Р»Рё
     if(show_all) {
       for (int i = 0; i < 10; i++)
         for (int j = 0; j < 10; j++)
@@ -280,16 +280,16 @@ public class SeaFight extends Canvas implements CommandListener {
     g.setColor(BLACK);
 
     // lines
-    for (int i = 0; i <= 10; i++)                     // вертикальные  
+    for (int i = 0; i <= 10; i++)                    // РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рµ
       g.drawLine(i*dx + 5, 20, i*dx + 5, 500);
-    for (int i = 0; i <= 10; i++)                     // горизонтальные
+    for (int i = 0; i <= 10; i++)                    // РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ
       g.drawLine(5, i*dy + 20, 500, i*dy + 20);
 
     g.setFont(Font.getDefaultFont());
     g.drawString("Enter:", 1, 1, Graphics.LEFT | Graphics.TOP);
     
 
-    // подписи к осям
+    // РїРѕРґРїРёСЃРё Рє РѕСЃСЏРј
     g.setFont(Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
     for (int i = 0; i < 10; i++) 
       g.drawString("" + i, i*dx + dx/2 + 5, 20, Graphics.HCENTER | Graphics.BOTTOM);
@@ -321,8 +321,8 @@ public class SeaFight extends Canvas implements CommandListener {
 */   
   }
 
-  // Определяет, что обработка должна быть сделана в ответ на событие опускания
-  // клавиши, произошедшее в Canvas. Этот метод подменяет тот же самый метод в Canvas.
+  // РћРїСЂРµРґРµР»СЏРµС‚, С‡С‚Рѕ РѕР±СЂР°Р±РѕС‚РєР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЃРґРµР»Р°РЅР° РІ РѕС‚РІРµС‚ РЅР° СЃРѕР±С‹С‚РёРµ РѕРїСѓСЃРєР°РЅРёСЏ
+  // РєР»Р°РІРёС€Рё, РїСЂРѕРёР·РѕС€РµРґС€РµРµ РІ Canvas. Р­С‚РѕС‚ РјРµС‚РѕРґ РїРѕРґРјРµРЅСЏРµС‚ С‚РѕС‚ Р¶Рµ СЃР°РјС‹Р№ РјРµС‚РѕРґ РІ Canvas.
   public void keyReleased(int keyCode) {
     printKeyEventInfo(keyCode);
   }
@@ -361,7 +361,7 @@ public class SeaFight extends Canvas implements CommandListener {
       if (x-1 >= 0) if (m_sea[y+1][x-1] == 1) return true;
       if (x+1 < 10) if (m_sea[y+1][x+1] == 1) return true;
     }
-    else {  // движение вправо
+    else {  // РґРІРёР¶РµРЅРёРµ РІРїСЂР°РІРѕ
       if (x+1 >= 10) return true;
       if (m_sea[y][x+1] == 1) return true;
       if (y-1 >= 0) if (m_sea[y-1][x+1] == 1) return true;
